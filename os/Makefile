@@ -33,9 +33,9 @@ build: env switch-check $(KERNEL_BIN)
 
 switch-check:
 ifeq ($(BOARD), qemu)
-	(which last-qemu) || (rm last-k210 -f && touch last-qemu && make clean)
+	(which last-qemu) || (rm -rf last-k210 && touch last-qemu && make clean)
 else ifeq ($(BOARD), k210)
-	(which last-k210) || (rm last-qemu -f && touch last-k210 && make clean)
+	(which last-k210) || (rm -rf last-qemu -f && touch last-k210 && make clean)
 endif
 
 env:
@@ -66,7 +66,7 @@ disasm-vim: kernel
 
 run: run-inner
 
-	
+
 
 run-inner: build
 ifeq ($(BOARD),qemu)
